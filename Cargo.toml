@@ -1,0 +1,10 @@
+[package]
+name = "ctf_server_1"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4"
+serde = {version = "1.0.210", features=["derive"]}
+serde_json = { version = "1.0", default-features = false, features = ["alloc"] }
+

@@ -6,6 +6,23 @@ pub struct StatusAns {
     pub status: i32,
 }
 
+#[derive(Serialize)]
+pub struct MyResponse<T> {
+    pub data: T,
+    pub status: StatusAns
+}
+
+
+impl<T> MyResponse<T> 
+{
+    pub fn new(my_data: T, status: StatusAns)-> Self {
+        MyResponse {
+            data: my_data,
+            status: status
+        }
+    }
+}
+
 
 
 #[derive(Serialize, Deserialize)]

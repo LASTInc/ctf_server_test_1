@@ -1,3 +1,5 @@
+use std::error::Error;
+
 use actix_web :: {
     get, post, web, App, HttpResponse, HttpServer, Responder, Result
 };
@@ -8,7 +10,7 @@ use crate::structs::{TwitsModel, UserModel, StatusAns};
 enum Status {
     Auth,
     MainAuth,
-    
+
 }
 
 
@@ -18,7 +20,7 @@ async fn check_reg() {
 
 
 #[get("/get_data_for_ayth")]
-async fn get_data_for_auth_user(data: web::Json<UserModel>) -> String {
+pub async fn get_data_for_auth_user(data: web::Json<UserModel>) -> Option<String> {
     let vec_twits: Vec<TwitsModel> = vec ![
         TwitsModel{name: 
             "Марков Лаврентий".to_string(),
@@ -37,5 +39,5 @@ async fn get_data_for_auth_user(data: web::Json<UserModel>) -> String {
         },
     ];
 
-    serde_json::to_string(&vec_twits).unwrap()
+    Some(serde_json::to_string(&vec_twits).unwrap())
 }

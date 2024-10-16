@@ -68,6 +68,20 @@ impl MongoClient {
             None
         }
     }
+
+    pub async fn create_new_collection(&self, collection_name: &str) {
+        let all_collections = self.database.list_collection_names().await;
+        if let Ok(coll) = all_collections {
+            if coll.contains(&collection_name.to_string()) {
+            } else {
+                let ans = self.database.create_collection(collection_name).await;
+            }
+        }
+    }
+
+    pub async fn add_document_to_collection(&self, collection_name: &str, new_data: Vec<Document>) {
+        self.database.collection(collection_name).insert_many(new_data).await;
+    }
 }
 
 impl Drop for MongoClient {
